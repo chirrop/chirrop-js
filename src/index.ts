@@ -8,6 +8,7 @@ import {
   DEFAULT_FLUSH_DELAY,
   DEFAULT_API_ENDPOINT,
   DEFAULT_SERVICER_ENDPOINT,
+  USER_AGENT,
 } from "./constants";
 import AsyncLock from "async-lock";
 import { v7 as uuidv7 } from "uuid";
@@ -393,7 +394,10 @@ export class Client {
     this.flushLock = new AsyncLock();
 
     this.axiosInstance = axios.create({
-      headers: { Authorization: `Bearer ${this.apiKey}` },
+      headers: {
+        Authorization: `Bearer ${this.apiKey}`,
+        "User-Agent": USER_AGENT,
+      },
       timeout: this.timeout,
     });
 
